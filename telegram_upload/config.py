@@ -3,8 +3,15 @@ import os
 
 import click
 
-CONFIG_DIRECTORY = os.environ.get('TELEGRAM_UPLOAD_CONFIG_DIRECTORY', '~/.config')
-CONFIG_FILE = os.path.expanduser('{}/telegram-upload.json'.format(CONFIG_DIRECTORY))
+
+#CONFIG_DIRECTORY = os.environ.get('TELEGRAM_UPLOAD_CONFIG_DIRECTORY', '~/.config')
+#CONFIG_FILE = os.path.expanduser('{}/telegram-upload.json'.format(CONFIG_DIRECTORY))
+
+# Ottieni il percorso assoluto dello script corrente
+current_script_directory = os.path.abspath(os.path.dirname(__file__))
+
+# Utilizza il percorso della cartella dello script come valore predefinito per CONFIG_DIRECTORY
+CONFIG_DIRECTORY = os.environ.get('TELEGRAM_UPLOAD_CONFIG_DIRECTORY', current_script_directory)
 SESSION_FILE = os.path.expanduser('{}/telegram-upload'.format(CONFIG_DIRECTORY))
 
 
