@@ -13,7 +13,7 @@ EMAIL = 'contacto@nekmo.com'
 URL = 'https://github.com/Nekmo/telegram-upload/'
 
 PACKAGE_NAME = 'telegram-upload'
-PACKAGE_DOWNLOAD_URL = 'https://github.com/Nekmo/telegram-upload/archive/master.zip'
+PACKAGE_DOWNLOAD_URL = 'https://github.com/Aikanairo/telegram-upload/archive/master.zip'
 MODULE = 'telegram_upload'
 REQUIREMENT_FILE = 'requirements.txt'
 STATUS_LEVEL = 5  # 1:Planning 2:Pre-Alpha 3:Alpha 4:Beta 5:Production/Stable 6:Mature 7:Inactive
