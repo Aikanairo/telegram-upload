@@ -130,8 +130,16 @@ class TelegramUploadClient(TelegramClient):
             if message is None:
                 click.echo('Failed to upload file "{}"'.format(file.file_name), err=True)
             if message and print_file_id:
-                click.echo('Uploaded successfully "{}" (file_id {})'.format(file.file_name,
-                                                                            pack_bot_file_id(message.media)))
+                #click.echo('Uploaded successfully "{}" (file_id {})'.format(file.file_name,
+                                                                           # pack_bot_file_id(message.media)))
+                click.echo('Uploaded successfully "{}" (file_id {}) (chat_id {}) (message_id {})'.format(
+                    file.file_name,
+                    pack_bot_file_id(message.media),
+                    message.chat_id,  # Aggiungi chat_id qui
+                    message.id  # Aggiungi message_id qui
+                ))
+
+
             if message and delete_on_success:
                 click.echo('Deleting "{}"'.format(file))
                 os.remove(file.path)
