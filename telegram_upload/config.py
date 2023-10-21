@@ -3,29 +3,31 @@ import os
 
 import click
 
+@click.command()
+@click.option('--config', default='~/.config', help='Specify the configuration directory')
+def main(config):
+    config_directory = os.path.expanduser(config)
+    config_file = os.path.expanduser(os.path.join(config_directory, 'telegram-upload.json'))
+    session_file = os.path.expanduser(os.path.join(config_directory, 'telegram-upload'))
 
-#CONFIG_DIRECTORY = os.environ.get('TELEGRAM_UPLOAD_CONFIG_DIRECTORY', '~/.config')
-#CONFIG_FILE = os.path.expanduser('{}/telegram-upload.json'.format(CONFIG_DIRECTORY))
+    def prompt_config(config_file):
+        os.makedirs(os.path.dirname(config_file), exist_ok=True)
+        click.echo('Go to https://my.telegram.org and create an App in API development tools')
+        api_id = click.prompt('Please Enter api_id', type=int)
+        api_hash = click.prompt('Now enter api_hash')
+        with open(config_file, 'w') as f:
+            json.dump({'api_id': api_id, 'api_hash': api_hash}, f)
+        return config_file
 
-# Ottieni il percorso assoluto dello script corrente
-current_script_directory = os.path.abspath(os.path.dirname(__file__))
+    def default_config():
+        if os.path.lexists(config_file):
+            return config_file
+        return prompt_config(config_file)
 
-# Utilizza il percorso della cartella dello script come valore predefinito per CONFIG_DIRECTORY
-CONFIG_DIRECTORY = os.environ.get('TELEGRAM_UPLOAD_CONFIG_DIRECTORY', current_script_directory)
-SESSION_FILE = os.path.expanduser('{}/telegram-upload'.format(CONFIG_DIRECTORY))
+    config_file = default_config()
+    click.echo(f'Using config directory: {config_directory}')
+    click.echo(f'Using config file: {config_file}')
+    click.echo(f'Using session file: {session_file}')
 
-
-def prompt_config(config_file):
-    os.makedirs(os.path.dirname(config_file), exist_ok=True)
-    click.echo('Go to https://my.telegram.org and create a App in API development tools')
-    api_id = click.prompt('Please Enter api_id', type=int)
-    api_hash = click.prompt('Now enter api_hash')
-    with open(config_file, 'w') as f:
-        json.dump({'api_id': api_id, 'api_hash': api_hash}, f)
-    return config_file
-
-
-def default_config():
-    if os.path.lexists(CONFIG_FILE):
-        return CONFIG_FILE
-    return prompt_config(CONFIG_FILE)
+if __name__ == '__main__':
+    main()
