@@ -8,8 +8,8 @@ import glob
 from itertools import chain
 from setuptools import setup, find_packages
 
-AUTHOR = "Nekmo"
-EMAIL = 'contacto@nekmo.com'
+AUTHOR = "Nekmo - Aik Mod"
+EMAIL = 'alfano.gaet@gmail.com'
 URL = 'https://github.com/Nekmo/telegram-upload/'
 
 PACKAGE_NAME = 'telegram-upload'
